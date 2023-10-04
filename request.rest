@@ -2,7 +2,7 @@
 POST http://127.0.0.1:8080/add
 Content-Type: application/x-www-form-urlencoded
 
-email=test08@example.com&score=0&treasures_found=0&animals_crushed=0
+email=test05@example.com&score=0&treasures_found=0&animals_crushed=0
 
 ### ping
 GET http://127.0.0.1:8080/api/ping

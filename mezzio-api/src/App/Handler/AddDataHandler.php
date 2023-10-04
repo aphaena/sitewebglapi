@@ -24,20 +24,24 @@ class AddDataHandler implements RequestHandlerInterface
     {
         $data = $request->getParsedBody();
 
-        // Validate data...
-        
-        $sql = 'INSERT INTO players (email, score, treasures_found, animals_crushed) VALUES (?, ?, ?, ?)';
-        $result = $this->adapter->query($sql, [
-            $data['email'],
-            $data['score'],
-            $data['treasures_found'],
-            $data['animals_crushed']
-        ]);
+        // Vérifiez si l'email existe déjà dans la base de données
+        $sqlCheck = new Sql($this->adapter);
+        $select = $sqlCheck->select()
+            ->from('players')
+            ->where(['email' => $data['email']]);
+        $statement = $sqlCheck->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
 
-        if ($result) {
-            return new JsonResponse(['status' => 'success']);
+        if ($result->current()) {
+            // Si l'email existe déjà, mettez à jour les champs avec des valeurs par défaut
+            $sql = 'UPDATE players SET score=0, treasures_found=0, animals_crushed=0 WHERE email=?';
+            $this->adapter->query($sql, [$data['email']]);
+            return new JsonResponse(['status' => 'success', 'message' => 'Updated existing player']);
         } else {
-            return new JsonResponse(['status' => 'error']);
+            // Si l'email n'existe pas, insérez un nouvel enregistrement
+            $sql = 'INSERT INTO players (email, score, treasures_found, animals_crushed) VALUES (?, 0, 0, 0)';
+            $this->adapter->query($sql, [$data['email']]);
+            return new JsonResponse(['status' => 'success', 'message' => 'Added new player']);
         }
     }
 }
