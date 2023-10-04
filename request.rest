@@ -1,0 +1,41 @@
+### Ajouter des données de jeu
+POST http://127.0.0.1:8080/add
+Content-Type: application/x-www-form-urlencoded
+
+email=test08@example.com&score=0&treasures_found=0&animals_crushed=0
+
+### ping
+GET http://127.0.0.1:8080/api/ping
+Content-Type: application/x-www-form-urlencoded
+
+
+### Infos
+GET http://127.0.0.1:8080/
+Content-Type: application/x-www-form-urlencoded
+
+
+
+### Infos players
+GET http://127.0.0.1:8080/players
+
+
+### Mettre à jour les données d'un joueur. en principe on utilise patch au lieu de post
+POST http://127.0.0.1:8080/player/2
+Content-Type: application/x-www-form-urlencoded
+
+score=200&treasures_found=5&animals_crushed=2
+
+
+### Mettre à jour les données d'un joueur par email. En principe on utilise patch au lieu de post
+POST http://127.0.0.1:8080/player/update-by-email
+Content-Type: application/x-www-form-urlencoded
+
+email=test05@example.com&score=500&treasures_found=5&animals_crushed=2
+
+
+
+### Mettre à jour les données d'un joueur par email. En principe on utilise patch au lieu de post
+POST http://127.0.0.1:8080/player/update-score
+Content-Type: application/x-www-form-urlencoded
+
+email=test04@example.com&score=300
