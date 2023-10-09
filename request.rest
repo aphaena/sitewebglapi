@@ -34,7 +34,7 @@ email=test05@example.com&score=500&treasures_found=5&animals_crushed=2
 
 
 
-### Mettre à jour les données d'un joueur par email. En principe on utilise patch au lieu de post
+###  Mettre à jour les données d'un joueur par email. En principe on utilise patch au lieu de post
 POST http://127.0.0.1:8080/player/update-score
 Content-Type: application/x-www-form-urlencoded
 
