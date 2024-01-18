@@ -24,6 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class HomePageHandler implements RequestHandlerInterface
 {
+    // Déclaration des propriétés de la classe
     public function __construct(
         private string $containerName,
         private RouterInterface $router,
@@ -31,10 +32,12 @@ class HomePageHandler implements RequestHandlerInterface
     ) {
     }
 
+    // Méthode handle qui est appelée pour chaque requête HTTP correspondant à ce gestionnaire
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = [];
 
+        // Switch pour déterminer le conteneur de services utilisé
         switch ($this->containerName) {
             case PimpleContainer::class:
                 $data['containerName'] = 'Pimple';
@@ -59,6 +62,7 @@ class HomePageHandler implements RequestHandlerInterface
                 break;
         }
 
+        // Détermination du routeur utilisé
         if ($this->router instanceof FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
@@ -67,6 +71,7 @@ class HomePageHandler implements RequestHandlerInterface
             $data['routerDocs'] = 'https://docs.laminas.dev/laminas-router/';
         }
 
+        // Gestion des moteurs de template
         if ($this->template === null) {
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
@@ -85,6 +90,7 @@ class HomePageHandler implements RequestHandlerInterface
             $data['templateDocs'] = 'https://docs.laminas.dev/laminas-view/';
         }
 
+        // Retourne une réponse HTML en utilisant le moteur de template
         return new HtmlResponse($this->template->render('app::home-page', $data));
     }
 }

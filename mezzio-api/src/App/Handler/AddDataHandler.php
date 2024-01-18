@@ -18,13 +18,15 @@ class AddDataHandler implements RequestHandlerInterface
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
+        // Constructeur qui initialise l'adaptateur de base de données
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getParsedBody();
+        // Récupère les données envoyées dans la requête
 
-        // Vérifiez si l'email existe déjà dans la base de données
+        // Vérifie si l'email existe déjà dans la base de données
         $sqlCheck = new Sql($this->adapter);
         $select = $sqlCheck->select()
             ->from('players')

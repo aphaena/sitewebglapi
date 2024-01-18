@@ -1,24 +1,30 @@
 <?php
 
 declare(strict_types=1);
+// Active le mode strict pour les types en PHP, ce qui rend les déclarations de type strictes
 
 use Laminas\ConfigAggregator\ConfigAggregator;
+// Importe la classe ConfigAggregator de Laminas
 
 return [
-    // Toggle the configuration cache. Set this to boolean false, or remove the
-    // directive, to disable configuration caching. Toggling development mode
-    // will also disable it by default; clear the configuration cache using
-    // `composer clear-config-cache`.
+    // Configuration du cache
     ConfigAggregator::ENABLE_CACHE => false,
+    // Désactive le cache de configuration. Utile en développement pour voir les changements de configuration immédiatement.
 
-    // Enable debugging; typically used to provide debugging information within templates.
+    // Configuration du débogage
     'debug'  => true,
+    // Active le mode débogage. Cela peut être utilisé pour afficher des informations de débogage dans les templates.
+
+    // Configuration spécifique à Mezzio
     'mezzio' => [
-        // Provide templates for the error handling middleware to use when
-        // generating responses.
+        // Gestionnaire d'erreurs
         'error_handler' => [
+            // Template à utiliser pour les erreurs 404 (page non trouvée)
             'template_404'   => 'error::404',
+
+            // Template à utiliser pour les autres erreurs
             'template_error' => 'error::error',
         ],
     ],
 ];
+

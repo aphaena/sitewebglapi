@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App;
 
 /**
- * The configuration provider for the App module
+ * Le fournisseur de configuration pour le module App
  *
- * @see https://docs.laminas.dev/laminas-component-installer/
+ * Fournit une structure organisée pour la configuration du module.
  */
 class ConfigProvider
 {
     /**
-     * Returns the configuration array
+     * Retourne le tableau de configuration
      *
-     * To add a bit of a structure, each section is defined in a separate
-     * method which returns an array with its configuration.
+     * Chaque section est définie dans une méthode séparée qui retourne
+     * un tableau avec sa configuration.
      */
     public function __invoke(): array
     {
@@ -26,13 +26,14 @@ class ConfigProvider
     }
 
     /**
-     * Returns the container dependencies
+     * Retourne les dépendances du conteneur
      */
     public function getDependencies(): array
     {
         return [
             'invokables' => [
                 Handler\PingHandler::class => Handler\PingHandler::class,
+                // Définit PingHandler comme invokable (créé sans factory)
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
@@ -41,12 +42,13 @@ class ConfigProvider
                 App\Handler\UpdatePlayerHandler::class => App\Handler\UpdatePlayerHandlerFactory::class,
                 App\Handler\UpdatePlayerByEmailHandler::class => App\Handler\UpdatePlayerByEmailHandlerFactory::class,
                 App\Handler\UpdateScoreByEmailHandler::class => App\Handler\UpdateScoreByEmailHandlerFactory::class,
+                // Associe chaque handler à sa factory correspondante
             ],
         ];
     }
 
     /**
-     * Returns the templates configuration
+     * Retourne la configuration des templates
      */
     public function getTemplates(): array
     {
@@ -55,6 +57,7 @@ class ConfigProvider
                 'app'    => ['templates/app'],
                 'error'  => ['templates/error'],
                 'layout' => ['templates/layout'],
+                // Définit les chemins vers les dossiers de templates
             ],
         ];
     }

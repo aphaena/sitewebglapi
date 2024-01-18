@@ -1,3 +1,43 @@
+# Demarrer un serveur PHP dans un terminal
+php -S 0.0.0.0:8080 -t public/
+
+# Application Mezzio
+
+## Description
+Ce projet est une application web développée avec le framework Mezzio. Elle offre une API pour la gestion des joueurs, permettant des opérations telles que l'ajout, la mise à jour et la récupération de données de joueurs.
+
+## Installation
+Pour installer ce projet, suivez les étapes suivantes :
+1. Clonez le dépôt : `git clone [URL_DU_REPO]`
+2. Installez les dépendances : `composer install`
+3. Configurez votre environnement de base de données dans `config/autoload/local.php`
+
+## Utilisation
+Après l'installation, vous pouvez démarrer le serveur de développement :
+php -S 0.0.0.0:8080 -t public/
+
+L'API est maintenant accessible à `http://localhost:8080`.
+
+## Fonctionnalités
+- **Ajout de joueurs** : Ajoutez de nouveaux joueurs à la base de données.
+- **Mise à jour des joueurs** : Mettez à jour les informations des joueurs par leur email ou ID.
+- **Liste des joueurs** : Récupérez une liste de tous les joueurs.
+
+Les routes sont dans le fichier request.rest
+
+## Contribution
+Les contributions à ce projet sont les bienvenues. Veuillez suivre les bonnes pratiques de développement et soumettre des pull requests pour toute proposition de modification.
+
+## Licence
+Ce projet est distribué sous la licence [IMTS_free].
+
+
+
+
+
+
+
+
 # Mezzio Skeleton and Installer
 
 [![Build Status](https://github.com/mezzio/mezzio-skeleton/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/mezzio/mezzio-skeleton/actions/workflows/continuous-integration.yml)

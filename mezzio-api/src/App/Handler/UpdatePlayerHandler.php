@@ -16,6 +16,7 @@ class UpdatePlayerHandler implements RequestHandlerInterface
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
+         // Constructeur qui initialise l'adaptateur de base de données
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -42,15 +43,16 @@ class UpdatePlayerHandler implements RequestHandlerInterface
                 $id
             ]);
     
+             // Retourne une réponse en fonction du succès de la mise à jour
             if ($result) {
                 return new JsonResponse(['status' => 'success', 'updated_id' => $id]);
             } else {
                 throw new \Exception("Échec de la mise à jour du joueur.");
             }
         } catch (\Exception $e) {
+              // Gestion des erreurs avec un message d'erreur dans la réponse JSON
             return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()]);
         }
      }
-    
-    
+        
 }

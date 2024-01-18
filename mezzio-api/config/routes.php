@@ -1,60 +1,41 @@
 <?php
 
 declare(strict_types=1);
+// Active le mode strict pour les types en PHP
 
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
+// Importe les classes nécessaires pour l'application et la configuration des routes
 
 /**
- * FastRoute route configuration
+ * Configuration des routes FastRoute
  *
- * @see https://github.com/nikic/FastRoute
- *
- * Setup routes with a single request method:
- *
- * $app->get('/', App\Handler\HomePageHandler::class, 'home');
- * $app->post('/album', App\Handler\AlbumCreateHandler::class, 'album.create');
- * $app->put('/album/{id:\d+}', App\Handler\AlbumUpdateHandler::class, 'album.put');
- * $app->patch('/album/{id:\d+}', App\Handler\AlbumUpdateHandler::class, 'album.patch');
- * $app->delete('/album/{id:\d+}', App\Handler\AlbumDeleteHandler::class, 'album.delete');
- *
- * Or with multiple request methods:
- *
- * $app->route('/contact', App\Handler\ContactHandler::class, ['GET', 'POST', ...], 'contact');
- *
- * Or handling all request methods:
- *
- * $app->route('/contact', App\Handler\ContactHandler::class)->setName('contact');
- *
- * or:
- *
- * $app->route(
- *     '/contact',
- *     App\Handler\ContactHandler::class,
- *     Mezzio\Router\Route::HTTP_METHOD_ANY,
- *     'contact'
- * );
+ * Exemples de configuration de routes :
  */
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
+    // Route pour la page d'accueil
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
+
+    // Route pour une requête GET vers '/api/ping'
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
 
-    // Ajoutez un player /add
+    // Route pour ajouter un joueur via une requête POST vers '/add'
     $app->post('/add', App\Handler\AddDataHandler::class, 'add.data');
 
+    // Route pour lister les joueurs via une requête GET vers '/players'
     $app->get('/players', App\Handler\ListPlayersHandler::class, 'list.players');
 
-    // mise à jour d'un persdonnage par son id
-    // ici on devrait utiliser patch au lieu de post
+    // Route pour mettre à jour un joueur par son ID via une requête POST vers '/player/{id}'
+    // Remarque : PATCH serait plus approprié pour une mise à jour
     $app->post('/player/{id:\d+}', App\Handler\UpdatePlayerHandler::class, 'update.player');
     
-    // mise à jour d'un persdonnage par son email
-    // ici on devrait utiliser patch au lieu de post
+    // Route pour mettre à jour un joueur par son email via une requête POST vers '/player/update-by-email'
+    // Remarque : PATCH serait plus approprié pour une mise à jour
     $app->post('/player/update-by-email', App\Handler\UpdatePlayerByEmailHandler::class, 'update.player.by.email');
 
-    // mise à jour du score d'un persdonnage par son email
+    // Route pour mettre à jour le score d'un joueur par son email via une requête POST vers '/player/update-score'
     $app->post('/player/update-score', App\Handler\UpdateScoreByEmailHandler::class, 'update.score.by.email');
 
 };
