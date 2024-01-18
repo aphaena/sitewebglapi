@@ -8,7 +8,7 @@ Ce projet est une application web développée avec le framework Mezzio. Elle of
 
 ## Installation
 Pour installer ce projet, suivez les étapes suivantes :
-1. Clonez le dépôt : `git clone [URL_DU_REPO]`
+1. Clonez le dépôt : `git clone [ https://github.com/aphaena/sitewebglapi.git ]`
 2. Installez les dépendances : `composer install`
 3. Configurez votre environnement de base de données dans `config/autoload/local.php`
 
